@@ -6,8 +6,7 @@
 }
 
 @theme inline {
-    --font-sans: var(--font-proxima-nova);
-    --font-mono: var(--font-proxima-nova);
+    --font-sans: var(--font-nunito-sans);
 }
 
 body {

@@ -1,26 +1,10 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
+import { Nunito_Sans } from "next/font/google";
 import "./globals.css";
 
-const proximaNova = localFont({
-    src: [
-        {
-            path: "./fonts/proximanova-regular.otf",
-            weight: "400",
-            style: "normal",
-        },
-        {
-            path: "./fonts/proximanova-medium.otf",
-            weight: "500",
-            style: "normal",
-        },
-        {
-            path: "./fonts/proximanova-bold.otf",
-            weight: "700",
-            style: "normal",
-        },
-    ],
-    variable: "--font-proxima-nova",
+const nunitoSans = Nunito_Sans({
+    subsets: ["latin"],
+    variable: "--font-nunito-sans",
 });
 
 export const metadata: Metadata = {
@@ -35,7 +19,7 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
-            <body className={`${proximaNova.variable} antialiased`}>
+            <body className={`${nunitoSans.variable} antialiased`}>
                 <main className="font-sans">{children}</main>
             </body>
         </html>
