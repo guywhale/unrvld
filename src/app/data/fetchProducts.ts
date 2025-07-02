@@ -64,7 +64,7 @@ export default async function fetchProducts(): Promise<Product[]> {
                 price: node.variants?.edges?.[0]?.node?.price?.amount ?? "0.00",
                 description: node.description,
                 imageUrl: node.featuredImage?.url ?? "",
-                imageAlt: node.featuredImage?.altText ?? "",
+                imageAlt: node.featuredImage?.altText ?? node.title,
                 handle: node.handle,
                 collections: node.collections?.edges.map(({ node }) => {
                     return node.title;
