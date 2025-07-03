@@ -10,7 +10,7 @@ type Props = {
 
 export default function ProductFilters({ productsOnLoad, updateGrid }: Props) {
     const [selectedCollection, setSelectedCollection] = useState<string>("All");
-    const [sortOrder, setSortOrder] = useState<string>("none");
+    const [sortOrder, setSortOrder] = useState<string>("price-h-to-l");
 
     const collections = useMemo(() => {
         const allCollections = productsOnLoad.flatMap(
@@ -21,7 +21,8 @@ export default function ProductFilters({ productsOnLoad, updateGrid }: Props) {
 
     useEffect(() => {
         const filtered = applyFilters(productsOnLoad, selectedCollection);
-        updateGrid(filtered);
+        const sorted = applySortOrder(filtered, sortOrder);
+        updateGrid(sorted);
     }, [productsOnLoad, selectedCollection, sortOrder, updateGrid]);
 
     function applyFilters(products: Product[], selectedCollection: string) {
@@ -35,6 +36,22 @@ export default function ProductFilters({ productsOnLoad, updateGrid }: Props) {
         });
     }
 
+    function applySortOrder(products: Product[], order: string) {
+        const sorted = [...products];
+
+        if (order === "price-h-to-l") {
+            return sorted.sort((a, b) => {
+                return parseFloat(b.price) - parseFloat(a.price);
+            });
+        } else if (order === "price-l-to-h") {
+            return sorted.sort((a, b) => {
+                return parseFloat(a.price) - parseFloat(b.price);
+            });
+        } else {
+            return sorted;
+        }
+    }
+
     return (
         <div className="mt-6">
             <label>
@@ -42,16 +59,9 @@ export default function ProductFilters({ productsOnLoad, updateGrid }: Props) {
                 <select
                     name="orderBy"
                     onChange={(e) => {
-                        const value = e.target.value;
-
-                        // if (value === "none") {
-                        //     updateGrid(products);
-                        // } else if (value === "price-h-to-l") {
-                        //     const filtered = [...products].sort((a, b) => );
-                        // }
+                        setSortOrder(e.target.value);
                     }}
                 >
-                    <option value="none">None</option>
                     <option value="price-h-to-l">Price: High to low</option>
                     <option value="price-l-to-h">Price: Low to High</option>
                 </select>
