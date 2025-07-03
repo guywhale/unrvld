@@ -5,40 +5,46 @@ import Link from "next/link";
 type Props = {
     product: Product;
 };
+
 export default function ProductCTACard({ product }: Props) {
-    const { imageUrl, imageAlt, title, vendor, colors, price, handle } =
-        product;
-    const color = colors[0] ?? "N/A";
+    const { imageUrl, imageAlt, title, vendor, color, price, handle } = product;
 
     return (
-        <article className="flex flex-col bg-white group hover:outline-1 active:outline-1 focus-within:outline-1 outline-black">
-            <div className="relative w-full pb-[100%]">
+        <article
+            tabIndex={0}
+            onTouchStart={(e) => {
+                e.currentTarget.focus();
+            }}
+            className="flex flex-col group hover:outline-1 focus:outline-1 focus-within:outline-1 outline-black"
+        >
+            <div className="relative w-full mb-[1px] pb-[100%]">
                 <Image src={imageUrl} alt={imageAlt} fill={true} />
             </div>
-            <div className="flex-1 flex flex-col p-4">
+            <div className="flex-1 flex flex-col p-4 bg-white">
                 <div className="mb-1">
-                    <p className="mb-0.5 text-xs leading-4 tracking-[0.04em] font-extrabold uppercase">
+                    <p className="mb-0.5 text-xs md:text-sm leading-4 md:leading-5 tracking-[0.04em] font-extrabold uppercase">
                         {vendor}
                     </p>
-                    <h2 className="mb-0.5 text-sm leading-5 font-normal">
+                    <h2 className="mb-0.5 text-sm md:text-base leading-5 md:leading-5.5 font-normal">
                         {title}
                     </h2>
-                    <p className="text-sm leading-5 font-normal text-neutral-500">
-                        {color}
+                    <p className="text-sm md:text-base leading-5 md:leading-5.5 font-normal text-neutral-500">
+                        {color?.[0] ?? "N/A"}
                     </p>
                 </div>
                 <div className="flex items-center justify-between mt-auto">
-                    <p className="text-xs leading-4 tracking-[0.04em]">
+                    <p className="text-xs md:text-sm leading-4 md:leading-5 tracking-[0.04em]">
                         £{parseFloat(price).toFixed(2)}
                     </p>
                     <Link
                         href={`/product/${handle}`}
-                        className="hidden group-hover:flex group-active:flex group-focus:flex items-end h-4"
+                        className="hidden group-hover:flex group-focus-within:flex items-end h-4"
                     >
-                        <span className="mr-2 text-xs leading-3 h-3 tracking-[0.04em] font-extrabold uppercase">
+                        <span className="mr-2 text-xs md:text-sm leading-3 md:leading-3.5 h-3 md:h-3.5 tracking-[0.04em] font-extrabold uppercase">
                             View
                         </span>
                         <svg
+                            className="animate-side-to-side block"
                             width="16"
                             height="16"
                             viewBox="0 0 16 16"

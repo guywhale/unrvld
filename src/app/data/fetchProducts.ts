@@ -25,17 +25,15 @@ export default async function fetchProducts(): Promise<Product[]> {
                                     }
                                 }
                             }
-                            options {
-                                name
-                                optionValues {
-                                    name
-                                }
-                            }
                             variants(first: 1) {
                                 edges {
                                     node {
                                         price {
                                             amount
+                                        }
+                                        selectedOptions {
+                                            name
+                                            value
                                         }
                                     }
                                 }
@@ -68,15 +66,11 @@ export default async function fetchProducts(): Promise<Product[]> {
                 collections: node.collections?.edges.map(({ node }) => {
                     return node.title;
                 }) ?? ["None"],
-                colors: node.options
-                    .filter(
+                color: node.variants?.edges?.[0]?.node?.selectedOptions
+                    ?.filter(
                         (option: { name: string }) => option.name === "Color"
                     )
-                    .flatMap(({ optionValues }) => {
-                        return optionValues.map(
-                            (value: { name: string }) => value.name
-                        );
-                    }) ?? ["None"],
+                    .flatMap((option: { value: string }) => option.value),
             };
         });
 

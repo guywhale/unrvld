@@ -22,7 +22,7 @@ export default function Products({ productsOnLoad }: Props) {
             </div>
             <div
                 aria-label="Product List"
-                className="grid items-stretch grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 py-[1px] gap-px bg-neutral-200"
+                className="grid items-stretch grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 p-[1px] gap-px bg-neutral-200"
             >
                 {products.map((product: Product) => {
                     return (

@@ -9,7 +9,7 @@ export type Product = {
     imageHeight: number;
     handle: string;
     collections: string[];
-    colors: string[];
+    color: string[] | undefined;
 };
 
 export type ProductQueryResponse = {
@@ -33,16 +33,16 @@ export type ProductQueryResponse = {
                         };
                     }[];
                 };
-                options: {
-                    name: string;
-                    optionValues: { name: string }[];
-                }[];
                 variants?: {
                     edges: {
                         node: {
                             price: {
                                 amount: string;
                             };
+                            selectedOptions: {
+                                name: string;
+                                value: string;
+                            }[];
                         };
                     }[];
                 };
