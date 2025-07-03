@@ -24,9 +24,13 @@ export default function Products({ productsOnLoad }: Props) {
                 aria-label="Product List"
                 className="grid items-stretch grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 p-[1px] gap-px bg-neutral-200"
             >
-                {products.map((product: Product) => {
+                {products.map((product: Product, index) => {
                     return (
-                        <ProductCTACard key={product.id} product={product} />
+                        <ProductCTACard
+                            key={product.id}
+                            product={product}
+                            isAboveFold={index >= 0 && index <= 3}
+                        />
                     );
                 })}
             </div>

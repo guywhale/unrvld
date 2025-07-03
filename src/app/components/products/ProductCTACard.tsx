@@ -4,9 +4,10 @@ import Link from "next/link";
 
 type Props = {
     product: Product;
+    isAboveFold: boolean;
 };
 
-export default function ProductCTACard({ product }: Props) {
+export default function ProductCTACard({ product, isAboveFold }: Props) {
     const { imageUrl, imageAlt, title, vendor, color, price, handle } = product;
 
     return (
@@ -18,7 +19,13 @@ export default function ProductCTACard({ product }: Props) {
             className="flex flex-col group hover:outline-1 focus:outline-1 focus-within:outline-1 outline-black"
         >
             <div className="relative w-full mb-[1px] pb-[100%]">
-                <Image src={imageUrl} alt={imageAlt} fill={true} />
+                <Image
+                    src={imageUrl}
+                    alt={imageAlt}
+                    fill={true}
+                    sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33.33vw, 50vw"
+                    priority={isAboveFold}
+                />
             </div>
             <div className="flex-1 flex flex-col p-4 bg-white">
                 <div className="mb-1">
