@@ -67,8 +67,8 @@ export default async function fetchProducts(): Promise<Product[]> {
                     return node.title;
                 }) ?? ["None"],
                 color: node.variants?.edges?.[0]?.node?.selectedOptions
-                    ?.filter((option) => option.name === "Color")
-                    .flatMap((option) => option.value),
+                    ?.filter(({ name }) => name === "Color")
+                    .flatMap(({ value }) => value) ?? ["N/A"],
             };
         });
 
