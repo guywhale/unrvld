@@ -10,15 +10,12 @@ export default async function fetchProducts(): Promise<Product[]> {
                         node {
                             id
                             title
-                            description
-                            priceRange {
-                                maxVariantPrice {
-                                    amount
-                                }
-                            }
+                            vendor
                             featuredImage {
                                 url
                                 altText
+                                width
+                                height
                             }
                             handle
                             collections(first: 3) {
@@ -61,10 +58,12 @@ export default async function fetchProducts(): Promise<Product[]> {
             return {
                 id: node.id,
                 title: node.title,
+                vendor: node.vendor ?? "N/A",
                 price: node.variants?.edges?.[0]?.node?.price?.amount ?? "0.00",
-                description: node.description,
                 imageUrl: node.featuredImage?.url ?? "",
                 imageAlt: node.featuredImage?.altText ?? node.title,
+                imageWidth: node.featuredImage?.width ?? 0,
+                imageHeight: node.featuredImage?.height ?? 0,
                 handle: node.handle,
                 collections: node.collections?.edges.map(({ node }) => {
                     return node.title;
