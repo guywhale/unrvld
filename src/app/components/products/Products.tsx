@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Product } from "../../types/product";
 import SectionHeader from "../SectionHeader";
+import ProductFilters from "./ProductFilters";
 import ProductCTACard from "./ProductCTACard";
 
 type Props = {
@@ -14,10 +15,14 @@ export default function Products({ productsOnLoad }: Props) {
 
     return (
         <section aria-label="Explore the Range">
-            <div className="flex">
+            <div className="pt-16 pb-10 px-6.5 md:flex">
                 <SectionHeader
                     tagline={"Spring Summer 24"}
                     title={"Explore the Range"}
+                />
+                <ProductFilters
+                    productsOnLoad={productsOnLoad}
+                    updateGrid={setProducts}
                 />
             </div>
             <div
