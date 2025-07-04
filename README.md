@@ -1,4 +1,9 @@
-1. Swapped Proxima Nova font to Nunito Sans as don't have access to font via Adobe.
+-   I've used Next JS with TypeScript and Tailwind for this project.
+-   The code for the project is here: https://github.com/guywhale/unrvld. It's a public repository, so it should be possible to clone, but let me know if you have any problems.
+-   It should be possible to view by running 'npm run dev' in the folder the repo has been cloned into. I've included an .nvmrc file with the Node version used.
+-   I've build a products grid with order by price and collection filters. I've made a few adjustments to the design to fit it all in.
+-   I've Swapped Proxima Nova font to Nunito Sans as I don't have access to font via Adobe.
+-   I'd also hoped to build an accordion (hence the SectionHeader component) but ran out of time.
 
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
