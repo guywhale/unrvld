@@ -15,7 +15,7 @@ export default function Products({ productsOnLoad }: Props) {
 
     return (
         <section aria-label="Explore the Range">
-            <div className="pt-16 pb-10 px-6.5 md:flex">
+            <div className="pt-16 pb-10 pl-6.5 lg:flex overflow-hidden">
                 <SectionHeader
                     tagline={"Spring Summer 24"}
                     title={"Explore the Range"}

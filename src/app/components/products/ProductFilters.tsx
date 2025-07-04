@@ -2,6 +2,7 @@
 
 import { Product } from "@/app/types/product";
 import { Dispatch, SetStateAction, useEffect, useMemo, useState } from "react";
+import ProductFilterRadio from "./ProductFilterRadio";
 
 type Props = {
     productsOnLoad: Product[];
@@ -53,48 +54,61 @@ export default function ProductFilters({ productsOnLoad, updateGrid }: Props) {
     }
 
     return (
-        <div className="mt-6">
-            <label>
-                Order By:
+        <div className="flex flex-col md:flex-row gap-4 mt-4">
+            <label className="relative flex flex-col w-fit">
+                <span className="mb-2 font-bold text-xs md:text-sm leading-3 md:leading-3.5 tracking-[0.14em] uppercase">
+                    Order By:
+                </span>
                 <select
+                    className="py-2 pr-8 pl-3 border border-neutral-300 appearance-none"
                     name="orderBy"
                     onChange={(e) => {
                         setSortOrder(e.target.value);
                     }}
                 >
-                    <option value="price-h-to-l">Price: High to low</option>
+                    <option value="price-h-to-l">Price: High to Low</option>
                     <option value="price-l-to-h">Price: Low to High</option>
-                </select>
+                </select>{" "}
+                <svg
+                    className="absolute right-1.5 bottom-2"
+                    xmlns="http://www.w3.org/2000/svg"
+                    height="24px"
+                    viewBox="0 -960 960 960"
+                    width="24px"
+                    fill="#000"
+                >
+                    <path d="M480-360 280-560h400L480-360Z" />
+                </svg>
             </label>
-            <fieldset>
-                <legend>Collection</legend>
-                <label>
-                    All
-                    <input
-                        type="radio"
-                        name="collection"
-                        value="All"
-                        checked={"All" === selectedCollection}
-                        onChange={() => setSelectedCollection("All")}
-                    />
-                </label>
-                {collections.map((collection) => {
-                    return (
-                        <label key={collection}>
-                            {collection}
-                            <input
-                                type="radio"
-                                name="collection"
-                                value={collection}
-                                checked={collection === selectedCollection}
-                                onChange={() =>
-                                    setSelectedCollection(collection)
-                                }
-                            />
-                        </label>
-                    );
-                })}
-            </fieldset>
+            <div role="group" aria-labelledby="collection-label">
+                <h2
+                    id="collection-label"
+                    className="mb-2 font-bold text-xs md:text-sm leading-3 md:leading-3.5 tracking-[0.14em] uppercase"
+                >
+                    Collection:
+                </h2>
+                <div className="overflow-x-auto touch-auto">
+                    <div className="flex gap-2 min-w-max">
+                        <ProductFilterRadio
+                            collection="All"
+                            selectedCollection={selectedCollection}
+                            setSelectedCollection={setSelectedCollection}
+                        />
+                        {collections.map((collection) => {
+                            return (
+                                <ProductFilterRadio
+                                    key={collection}
+                                    collection={collection}
+                                    selectedCollection={selectedCollection}
+                                    setSelectedCollection={
+                                        setSelectedCollection
+                                    }
+                                />
+                            );
+                        })}
+                    </div>
+                </div>
+            </div>
         </div>
     );
 }
